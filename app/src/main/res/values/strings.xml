@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="sample_temperature">18°</string>
+    <string name="empty_value">--</string>
+    <string name="cloudy">CLOUDY</string>
+    <string name="min">min</string>
+    <string name="current">current</string>
+    <string name="max">max</string>
+    <string name="weather_background_image">weather background image</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="forecast_image_view">forecast image view</string>
+    <string name="no_data_image_view">no data image view</string>
+    <string name="permission_location_rationale">You not granted permissions to access your location yet </string>
+    <string name="failed_to_fetch_data_an_error_occurred">Failed to fetch data, an error occurred.</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_refresh">Search</string>
+
+</resources>
