@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="weatherForecast"
+            type="github.paulmburu.weatherapp.models.WeatherForecastPresentation" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@{weatherForecast.dateTime}"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tue 23.08.2016 - 02:00" />
+
+    <TextView
+        android:id="@+id/skyFTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Clear"
+        android:text="@{weatherForecast.weatherDescription}"
+        app:layout_constraintStart_toStartOf="@+id/dateTextView"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+
+    <TextView
+        android:id="@+id/pressureFTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pressure"
+        app:layout_constraintStart_toStartOf="@+id/winFTextView"
+        app:layout_constraintTop_toBottomOf="@+id/winFTextView" />
+
+    <TextView
+        android:id="@+id/pressureAmountFTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="100 Pa"
+        android:text="@{weatherForecast.pressure}"
+        app:layout_constraintBottom_toBottomOf="@+id/pressureFTextView"
+        app:layout_constraintStart_toEndOf="@+id/pressureFTextView"
+        app:layout_constraintTop_toTopOf="@+id/pressureFTextView" />
+
+    <TextView
+        android:id="@+id/humidityFTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/humidity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/pressureFTextView"
+        app:layout_constraintTop_toBottomOf="@+id/pressureFTextView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@{weatherForecast.humidity}"
+        app:layout_constraintBottom_toBottomOf="@+id/humidityFTextView"
+        app:layout_constraintStart_toEndOf="@+id/humidityFTextView"
+        app:layout_constraintTop_toTopOf="@+id/humidityFTextView"
+        tools:text="65 %" />
+
+    <TextView
+        android:id="@+id/winFTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/wind"
+        app:layout_constraintStart_toStartOf="@+id/skyFTextView"
+        app:layout_constraintTop_toBottomOf="@+id/skyFTextView" />
+
+    <TextView
+        android:id="@+id/windSpeedFTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        tools:text="7 m/s"
+        android:text="@{weatherForecast.windSpeed}"
+        app:layout_constraintBottom_toBottomOf="@+id/winFTextView"
+        app:layout_constraintStart_toEndOf="@+id/winFTextView"
+        app:layout_constraintTop_toTopOf="@+id/winFTextView" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{weatherForecast.temperature}"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/humidityFTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/humidityFTextView"
+        tools:text="23.7 C" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:contentDescription="@string/weather_type_image"
+        app:imageDrawable="@{weatherForecast.weatherType}"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/skyFTextView"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/icons8_clouds_100" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
