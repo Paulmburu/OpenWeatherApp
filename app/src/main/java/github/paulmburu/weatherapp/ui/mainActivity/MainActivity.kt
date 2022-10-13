@@ -1,20 +1,27 @@
 package github.paulmburu.weatherapp.ui.mainActivity
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import com.google.android.gms.location.FusedLocationProviderClient
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import github.paulmburu.domain.models.CurrentLocationWeather
 import github.paulmburu.weatherapp.R
 import github.paulmburu.weatherapp.databinding.ActivityMainBinding
 import github.paulmburu.weatherapp.models.WeatherForecastPresentation
+import github.paulmburu.weatherapp.ui.adapters.CustomPageAdapter
 import github.paulmburu.weatherapp.ui.adapters.WeatherForecastRecyclerAdapter
 import github.paulmburu.weatherapp.util.convertKelvinToCelsius
 import github.paulmburu.weatherapp.util.convertToTime
@@ -25,7 +32,11 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter: WeatherForecastRecyclerAdapter
+
+    // ViewPager items
+    private var views = ArrayList<View>()
+    private var pageTitles = ArrayList<String>()
+    private lateinit var pagerAdapter: CustomPageAdapter
 
     // AppBar items
     private lateinit var searchView: SearchView
@@ -40,7 +51,8 @@ class MainActivity : AppCompatActivity() {
 
         setObservers()
         setupAppBar()
-        setDisplayRecyclerView()
+        setupViewpager()
+
     }
 
     private fun setupAppBar() {
@@ -72,9 +84,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setDisplayRecyclerView() {
-        adapter = WeatherForecastRecyclerAdapter()
-        binding.forecastRecyclerview.adapter = adapter
+    private fun setupViewpager() {
+        pagerAdapter = CustomPageAdapter(views, pageTitles)
+        val locationView: View = binding.weatherForecast
+        val viewPager = locationView.findViewById<ViewPager>(R.id.pager)
+        val tabLayout = locationView.findViewById<TabLayout>(R.id.tab_layout)
+
+        viewPager.adapter = pagerAdapter
+        tabLayout.setupWithViewPager(viewPager)
     }
 
 
@@ -118,8 +135,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is MainViewModel.FetchWeatherForecastUiState.Success -> {
-                    val data = uiState.weatherForecast.distinctBy { it.dayOfTheWeek }
-                    displayWeatherForecastState(data)
+                    displayWeatherForecastState(uiState.weatherForecast)
                 }
 
                 is MainViewModel.FetchWeatherForecastUiState.Empty -> {
@@ -134,44 +150,60 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             progressBar.isVisible = true
             forecastViews.isVisible = false
+            searchLayout.isVisible = false
             noDataImageView.isVisible = false
         }
     }
 
     private fun displaySuccessState(currentLocationWeather: CurrentLocationWeather) {
         with(binding) {
-
             progressBar.isVisible = false
             forecastViews.isVisible = true
             noDataImageView.isVisible = false
-            failedTextView.isVisible = false
             setCurrentLocationViews(currentLocationWeather)
-            tempTextView.text = currentLocationWeather.mainInfo.temp.convertKelvinToCelsius()
-            tempMinTextView.text = currentLocationWeather.mainInfo.temp_min.convertKelvinToCelsius()
-            currentTempTextView.text = currentLocationWeather.mainInfo.temp.convertKelvinToCelsius()
-            tempMaxTextView.text = currentLocationWeather.mainInfo.temp_max.convertKelvinToCelsius()
-            weatherTypeTextView.text = currentLocationWeather.weatherInfo[0].main
-
         }
     }
 
     private fun displayWeatherForecastState(weatherForecast: List<WeatherForecastPresentation>) {
-        adapter.submitList(weatherForecast)
+
+        val data = weatherForecast.distinctBy { it.dayOfTheWeek }
+        data.forEach { it ->
+
+            val layoutInflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val view: View = layoutInflater.inflate(R.layout.weather_forecast, null)
+
+            val adapter = WeatherForecastRecyclerAdapter()
+            view.findViewById<RecyclerView>(R.id.data_recyclerview).adapter = adapter
+            view.findViewById<RecyclerView>(R.id.data_recyclerview).addItemDecoration(
+                DividerItemDecoration(
+                    this@MainActivity,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
+
+            val dayForecast = weatherForecast.filter { day -> day.dayOfTheWeek == it.dayOfTheWeek }
+            adapter.submitList(dayForecast)
+
+            views.add(views.size, view)
+            pageTitles.add(it.dayOfTheWeek)
+            pagerAdapter.notifyDataSetChanged()
+        }
+
         with(binding) {
             progressBar.isVisible = false
             forecastViews.isVisible = true
             noDataImageView.isVisible = false
-            failedTextView.isVisible = false
         }
     }
 
     private fun setCurrentLocationViews(currentLocationWeather: CurrentLocationWeather) {
         val locationView: View = binding.locationLayout
 
+        updateWeatherImage(currentLocationWeather.weatherInfo[0].main)
         locationView.findViewById<TextView>(R.id.tempTextView).text =
-            "${currentLocationWeather.mainInfo.temp.convertKelvinToCelsius()} c"
+            currentLocationWeather.mainInfo.temp.convertKelvinToCelsius()
         locationView.findViewById<TextView>(R.id.cloudsTextView).text =
-            currentLocationWeather.weatherInfo[0].description
+            currentLocationWeather.weatherInfo[0].description.replaceFirstChar { it.uppercaseChar() }
         locationView.findViewById<TextView>(R.id.windSpeedTextView).text =
             "${currentLocationWeather.wind.speed} m/s"
         locationView.findViewById<TextView>(R.id.pressureAmountTextView).text =
@@ -186,27 +218,43 @@ class MainActivity : AppCompatActivity() {
             currentLocationWeather.timeStamp.toLong().convertToTime()
     }
 
-    private fun displayEmptyState() {
-        adapter.submitList(null)
+    private fun updateWeatherImage(weatherType: String) {
+        val locationView: View = binding.locationLayout
+        val weatherImageView = locationView.findViewById<ImageView>(R.id.weatherImageView)
 
+        when (weatherType) {
+            "Clouds" -> {
+                weatherImageView.setImageDrawable(
+                    ContextCompat.getDrawable(applicationContext, R.drawable.icons8_clouds_100)
+                )
+            }
+            "Clear" -> {
+                weatherImageView.setImageDrawable(
+                    ContextCompat.getDrawable(applicationContext, R.drawable.icons8_sun_100)
+                )
+            }
+            "Rain" -> {
+                weatherImageView.setImageDrawable(
+                    ContextCompat.getDrawable(applicationContext, R.drawable.icons8_rain_100)
+                )
+            }
+        }
+    }
+
+    private fun displayEmptyState() {
         with(binding) {
             noDataImageView.isVisible = true
-            failedTextView.isVisible = false
             progressBar.isVisible = false
             forecastViews.isVisible = false
         }
     }
 
     private fun displayFailedState() {
-
         with(binding) {
-            noDataImageView.setImageDrawable(
-                ContextCompat.getDrawable(applicationContext, R.drawable.failure_image)
-            )
-            failedTextView.isVisible = true
             noDataImageView.isVisible = true
             progressBar.isVisible = false
             forecastViews.isVisible = false
+            searchLayout.isVisible = false
         }
     }
 

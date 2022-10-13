@@ -27,7 +27,7 @@ class FetchCurrentWeatherUseCaseTest {
     fun `When FetchCurrentWeather is called with Coordinates, LocationCurrentWeather should be returned`() =
         runBlocking {
             fetchCurrentWeatherBaseUseCase(
-                Coordinates(0.0,0.0)
+                "London"
             ).collect { resource ->
                 when(resource){
                     is Resource.Success -> {

@@ -81,4 +81,7 @@ class WeatherForecastEntity(
 
     @ColumnInfo(name = "humidity")
     val humidity: Double,
+
+    @ColumnInfo(name = "speed")
+    val windSpeed: Double,
 )

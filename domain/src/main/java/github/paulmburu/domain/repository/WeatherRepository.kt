@@ -6,8 +6,7 @@ import github.paulmburu.domain.models.WeatherForecast
 import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {
-    fun fetchLocationWeather(location: String): Flow<Resource<CurrentLocationWeather>>
-    fun fetchCurrentWeather(lat: Double, lon: Double): Flow<Resource<CurrentLocationWeather>>
+    fun fetchCurrentWeather(location: String): Flow<Resource<CurrentLocationWeather>>
     fun fetchWeatherForecast(location: String): Flow<Resource<List<WeatherForecast>>>
 
     suspend fun insertCurrentWeather(currentWeather: List<CurrentLocationWeather>)

@@ -17,8 +17,8 @@ class NetworkToDomainTest {
 
     @Test
     fun `When MainInfoDto toDomain is called, the Domain representation should be returned`() {
-        val mainInfoDto = MainInfoDto(temp = 234.0, temp_min = 232.2, temp_max = 235.8)
-        val mainInfo = MainInfo(temp = 234.0, temp_min = 232.2, temp_max = 235.8)
+        val mainInfoDto = MainInfoDto(temp = 234.0, temp_min = 232.2, temp_max = 235.8, 1017.0, 52.0)
+        val mainInfo = MainInfo(temp = 234.0, temp_min = 232.2, temp_max = 235.8, 1017.0, 52.0)
 
         Truth.assertThat(mainInfo).isEqualTo(mainInfoDto.toDomain())
     }
@@ -39,7 +39,9 @@ class NetworkToDomainTest {
             timeStamp = "12424",
             coord = CoordinatesDto(lat = 37.8, lon = 24.6),
             weather = arrayListOf(WeatherInfoDto(main = "Clouds", description = "Flat Clouds")),
-            main = MainInfoDto(temp = 234.0, temp_min = 232.2, temp_max = 235.8),
+            main = MainInfoDto(temp = 234.0, temp_min = 232.2, temp_max = 235.8, 1017.0, 52.0),
+            wind = WindInfoDto(speed = 7.2),
+            sys = SysInfoDto(sunrise = 1665630889, sunset = 1665674575)
         )
 
         val currentLocationWeather = CurrentLocationWeather(
@@ -48,7 +50,9 @@ class NetworkToDomainTest {
             timeStamp = "12424",
             coord = Coordinates(lat = 37.8, lon = 24.6),
             weatherInfo = arrayListOf(WeatherInfo(main = "Clouds", description = "Flat Clouds")),
-            mainInfo = MainInfo(temp = 234.0, temp_min = 232.2, temp_max = 235.8),
+            mainInfo = MainInfo(temp = 234.0, temp_min = 232.2, temp_max = 235.8, 1017.0, 52.0),
+            wind = WindInfo(speed = 7.2),
+            sys = SysInfo(sunrise = 1665630889, sunset = 1665674575)
         )
 
         Truth.assertThat(currentLocationWeather).isEqualTo(currentLocationWeatherDto.toDomain())
@@ -59,13 +63,15 @@ class NetworkToDomainTest {
         val weatherForecastDto = WeatherForecastDto(
             timeStamp = "2022-03-21 18:00:00",
             weather = arrayListOf(WeatherInfoDto(main = "Clouds", description = "Flat Clouds")),
-            main = MainInfoDto(temp = 234.0, temp_min = 232.2, temp_max = 235.8),
+            main = MainInfoDto(temp = 234.0, temp_min = 232.2, temp_max = 235.8, 1017.0, 52.0),
+            wind = WindInfoDto(speed = 7.2),
         )
 
         val weatherForecast = WeatherForecast(
             isoTimeStamp = "2022-03-21 18:00:00",
             weatherInfo = arrayListOf(WeatherInfo(main = "Clouds", description = "Flat Clouds")),
-            mainInfo = MainInfo(temp = 234.0, temp_min = 232.2, temp_max = 235.8),
+            mainInfo = MainInfo(temp = 234.0, temp_min = 232.2, temp_max = 235.8, 1017.0, 52.0),
+            wind = WindInfo(speed = 7.2),
         )
 
         Truth.assertThat(weatherForecast).isEqualTo(weatherForecastDto.toDomain())

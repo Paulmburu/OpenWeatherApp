@@ -7,4 +7,5 @@ data class WeatherForecastDto(
     var timeStamp: String,
     val weather: List<WeatherInfoDto>,
     val main: MainInfoDto,
+    val wind: WindInfoDto
 )

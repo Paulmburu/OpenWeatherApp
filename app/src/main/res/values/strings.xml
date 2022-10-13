@@ -14,5 +14,23 @@
     <string name="failed_to_fetch_data_an_error_occurred">Failed to fetch data, an error occurred.</string>
     <string name="menu_search">Search</string>
     <string name="menu_refresh">Search</string>
+    <string name="pressure">Pressure :</string>
+    <string name="humidity">Humidity :</string>
+    <string name="weather_type_image">Weather Type Image</string>
+    <string name="wind">Wind :</string>
+    <string name="search_your_city_at_the_right_top_to_get_the_latest_weather_information">Search your city at the right top 🔍 to get the latest weather information</string>
+    <string name="_25_4_c">25.4 °c</string>
+    <string name="few_clouds">Few Clouds</string>
+    <string name="_7_2_m_s">7.2 m/s</string>
+    <string name="_3990">3990</string>
+    <string name="sunrise">Sunrise :</string>
+    <string name="_12_14_pm">12:14 PM</string>
+    <string name="_1_41_am">1.41 AM</string>
+    <string name="last_update">Last Update</string>
+    <string name="_8_39_pm">8.39 PM</string>
+    <string name="_1016_0_hpa">1016.0 hPa</string>
+    <string name="sunset">Sunset :</string>
+    <string name="search_image">Search Image</string>
+    <string name="tabs">Tabs</string>
 
 </resources>

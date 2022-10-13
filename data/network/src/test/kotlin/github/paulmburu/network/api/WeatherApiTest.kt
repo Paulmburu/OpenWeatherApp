@@ -13,7 +13,7 @@ class WeatherApiTest : BaseTest() {
     @Test
     fun `When fetchCurrentWeather is called with all status, the correct result should be parsed`() =
         runBlocking {
-            val response = weatherApi.fetchCurrentWeather("37.8","122.08", "someAppKey")
+            val response = weatherApi.fetchCurrentWeather("Nairobi", "someAppKey")
             if (response.isSuccessful) {
                 Truth.assertThat(response.body()!!).isInstanceOf(CurrentLocationWeatherDto::class.java)
             }
@@ -22,7 +22,7 @@ class WeatherApiTest : BaseTest() {
     @Test
     fun `When fetchWeatherForecast is called with all status, the correct result should be parsed`() =
         runBlocking {
-            val response = weatherApi.fetchWeatherForecast("37.8","122.08", "someAppKey")
+            val response = weatherApi.fetchWeatherForecast("Nairobi", "someAppKey")
             if (response.isSuccessful) {
                 Truth.assertThat(response.body()!!).isInstanceOf(ForecastResponse::class.java)
             }

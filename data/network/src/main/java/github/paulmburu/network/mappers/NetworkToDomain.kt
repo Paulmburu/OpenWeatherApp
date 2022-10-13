@@ -58,6 +58,7 @@ fun WeatherForecastDto.toDomain(): WeatherForecast {
     return WeatherForecast(
         isoTimeStamp = timeStamp,
         mainInfo = main.toDomain(),
-        weatherInfo = weather.map { it.toDomain() }
+        weatherInfo = weather.map { it.toDomain() },
+        wind = wind.toDomain()
     )
 }

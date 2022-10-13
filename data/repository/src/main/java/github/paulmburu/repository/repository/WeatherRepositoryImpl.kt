@@ -21,44 +21,14 @@ class WeatherRepositoryImpl @Inject constructor(
     private val weatherApi: WeatherApi,
     private val weatherDao: WeatherDao
 ) : WeatherRepository {
-    override fun fetchLocationWeather(location: String): Flow<Resource<CurrentLocationWeather>> =
-        flow {
-            try {
-
-                val result = weatherApi.searchLocation(
-                    location,
-                    BuildConfig.BEARER_TOKEN
-                )
-                when {
-                    result.isSuccessful -> {
-                        weatherDao.insertCurrentWeather(
-                            arrayListOf(
-                                result.body()!!.toDomain().toLocal()
-                            )
-                        )
-                        emit(
-                            Resource.Success(result.body()!!.toDomain())
-                        )
-                    }
-                    else -> emit(Resource.Error(message = result.message()))
-                }
-            } catch (e: IOException) {
-                emit(Resource.Error(message = e.localizedMessage))
-                Timber.e(e)
-            } catch (e: Exception) {
-                Timber.e(e)
-            }
-        }
 
     override fun fetchCurrentWeather(
-        lat: Double,
-        lon: Double
+        location: String
     ): Flow<Resource<CurrentLocationWeather>> = flow {
         try {
 
             val result = weatherApi.fetchCurrentWeather(
-                lat.toString(),
-                lon.toString(),
+                location,
                 BuildConfig.BEARER_TOKEN
             )
             when {

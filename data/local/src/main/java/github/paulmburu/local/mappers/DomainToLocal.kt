@@ -35,6 +35,7 @@ fun WeatherForecast.toLocal(): WeatherForecastEntity {
         tempMin = mainInfo.temp_min,
         tempMax = mainInfo.temp_max,
         pressure =  mainInfo.pressure,
-        humidity = mainInfo.humidity
+        humidity = mainInfo.humidity,
+        windSpeed = wind.speed
     )
 }

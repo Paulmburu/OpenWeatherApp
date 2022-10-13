@@ -43,7 +43,10 @@ class WeatherDaoTest {
                 weatherTypeDescription = "Flat Clouds",
                 temp = 234.09,
                 tempMin = 220.43,
-                tempMax = 240.34
+                tempMax = 240.34,
+                pressure = 1017.0,
+                humidity = 52.0,
+                windSpeed = 7.2,
             )
         )
 
@@ -51,15 +54,48 @@ class WeatherDaoTest {
 
         val response = weatherDao.weatherForecast().first()
         Truth.assertThat(response.size).isGreaterThan(0)
-        Truth.assertThat(response.first().isoTimeStamp).isEqualTo(weatherForecast.first().isoTimeStamp)
+        Truth.assertThat(response.first().isoTimeStamp)
+            .isEqualTo(weatherForecast.first().isoTimeStamp)
 
     }
 
     @Test
     fun fetch_LocationWeather_Returns_the_correct_data() = runBlocking {
         val currentLocationWeather = listOf(
-            LocationWeatherEntity(id = "54678456",name = "Nairobi", timeStamp = "54678456", lat = -1.28333, lon = 36.81667, weatherType = "Sunny","Hot sun", tempMax = 234.4, tempMin = 224.5, temp = 230.5),
-            LocationWeatherEntity(id = "54678456",name = "Durban", timeStamp = "54678456", lat = -29.8579, lon = 31.0292, weatherType = "Sunny","Hot sun", tempMax = 234.4, tempMin = 224.5, temp = 230.5),
+            LocationWeatherEntity(
+                id = "54678456",
+                name = "Nairobi",
+                timeStamp = "54678456",
+                lat = -1.28333,
+                lon = 36.81667,
+                weatherType = "Sunny",
+                "Hot sun",
+                tempMax = 234.4,
+                tempMin = 224.5,
+                temp = 230.5,
+                pressure = 1017.0,
+                humidity = 52.0,
+                windSpeed = 7.2,
+                sunrise = 1665630889,
+                sunset = 1665674575
+            ),
+            LocationWeatherEntity(
+                id = "54678456",
+                name = "Durban",
+                timeStamp = "54678456",
+                lat = -29.8579,
+                lon = 31.0292,
+                weatherType = "Sunny",
+                "Hot sun",
+                tempMax = 234.4,
+                tempMin = 224.5,
+                temp = 230.5,
+                pressure = 1017.0,
+                humidity = 52.0,
+                windSpeed = 7.2,
+                sunrise = 1665630889,
+                sunset = 1665674575
+            ),
         )
 
         weatherDao.insertCurrentWeather(currentLocationWeather)

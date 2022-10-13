@@ -9,13 +9,13 @@ internal class WeatherApiRequestDispatcher : Dispatcher() {
 
     override fun dispatch(request: RecordedRequest): MockResponse {
         return when (request.path) {
-            "/data/2.5/weather?lat=37.8&lon=122.08&appid=someAppKey" -> {
+            "/data/2.5/weather?q=Nairobi&appid=someAppKey" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(MockResponseFileReader("json_responses/current_weather_response.json").content)
             }
 
-            "/data/2.5/forecast?lat=37.8&lon=122.08&appid=someAppKey" -> {
+            "/data/2.5/forecast?q=Nairobi&appid=someAppKey" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(MockResponseFileReader("json_responses/weather_forecast_response.json").content)

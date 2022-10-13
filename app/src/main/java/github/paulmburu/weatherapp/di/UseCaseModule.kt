@@ -12,11 +12,6 @@ import github.paulmburu.domain.usercases.*
 object UseCaseModule {
 
     @Provides
-    fun providesFetchLocationWeatherUseCase(weatherRepository: WeatherRepository): FetchLocationWeatherUseCase {
-        return FetchLocationWeatherUseCase(weatherRepository)
-    }
-
-    @Provides
     fun providesFetchCurrentWeatherUseCase(weatherRepository: WeatherRepository): FetchCurrentWeatherUseCase {
         return FetchCurrentWeatherUseCase(weatherRepository)
     }

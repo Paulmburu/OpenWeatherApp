@@ -21,6 +21,7 @@ fun WeatherForecastEntity.toDomain(): WeatherForecast{
     return WeatherForecast(
         isoTimeStamp = isoTimeStamp,
         weatherInfo = arrayListOf(WeatherInfo(weatherType, weatherTypeDescription)),
-        mainInfo = MainInfo(temp, tempMin, tempMax, pressure, humidity)
+        mainInfo = MainInfo(temp, tempMin, tempMax, pressure, humidity),
+        wind = WindInfo(windSpeed)
     )
 }

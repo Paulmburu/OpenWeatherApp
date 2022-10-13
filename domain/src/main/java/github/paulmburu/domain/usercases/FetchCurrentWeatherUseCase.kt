@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
-typealias FetchCurrentWeatherBaseUseCase = FlowBaseUseCase<Coordinates, Flow<Resource<CurrentLocationWeather>>>
+typealias FetchCurrentWeatherBaseUseCase = FlowBaseUseCase<String, Flow<Resource<CurrentLocationWeather>>>
 
 class FetchCurrentWeatherUseCase constructor(private val weatherRepository: WeatherRepository) :
     FetchCurrentWeatherBaseUseCase {
-    override fun invoke(params: Coordinates): Flow<Resource<CurrentLocationWeather>> = flow {
-        val result = weatherRepository.fetchCurrentWeather(params.lat, params.lon)
+    override fun invoke(location: String): Flow<Resource<CurrentLocationWeather>> = flow {
+        val result = weatherRepository.fetchCurrentWeather(location)
         result.collect { resource ->
             when (resource) {
                 is Resource.Success -> {
@@ -24,7 +24,7 @@ class FetchCurrentWeatherUseCase constructor(private val weatherRepository: Weat
                     )
                 }
                 is Resource.Error -> {
-                    emit(Resource.Error(message = resource.message))
+                    emit(Resource.Error<CurrentLocationWeather>(message = resource.message))
                 }
             }
         }

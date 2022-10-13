@@ -12,7 +12,7 @@ import org.junit.runner.RunWith
 
 
 class MainScreen : Screen<MainScreen>() {
-    val weatherImageBackground = KImageView{ withId(R.id.no_data_image_view)}
+    val weatherImageBackground = KImageView{ withId(R.id.searchImageView)}
 }
 
 @LargeTest

@@ -19,7 +19,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val fetchLocationWeatherUseCase: FetchLocationWeatherUseCase,
     private val fetchCurrentWeatherUseCase: FetchCurrentWeatherUseCase,
     private val fetchWeatherForecastUseCase: FetchWeatherForecastUseCase,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
@@ -36,7 +35,7 @@ class MainViewModel @Inject constructor(
         get() = mutableWeatherForecastResult
 
 
-    private val mutableConnectivityStatus = MutableLiveData<Boolean>()
+    val mutableConnectivityStatus = MutableLiveData<Boolean>()
     val connectivityStatus: LiveData<Boolean>
         get() = mutableConnectivityStatus
 
@@ -50,14 +49,17 @@ class MainViewModel @Inject constructor(
     }
 
 
-    fun loadLocalData() = viewModelScope.launch {
-        getCurrentWeatherFromDatabase()
-        getWeatherForecastFromDatabase()
+    fun loadLocalData(){
+        viewModelScope.launch {
+            getCurrentWeatherFromDatabase()
+        }
+        viewModelScope.launch {
+            getWeatherForecastFromDatabase()
+        }
     }
 
-
     private suspend fun fetchCurrentWeatherFromInternet(location: String) {
-        fetchLocationWeatherUseCase(location).onStart {
+        fetchCurrentWeatherUseCase(location).onStart {
             mutableFetchWeatherResult.value = FetchCurrentWeatherUiState.Loading
         }.collect { resource ->
             when (resource) {

@@ -1,27 +1,10 @@
-# WeatherApp
-
-This is an android app that fetches current weather and weather forecast for the current gps location.
-
-## Development Environment
-
-* Android Studio Bumblebee | 2021.1.1 Patch 2 or Higher
-* Language: Kotlin
-* Build System: Gradle
-
 ## Architecture
 
 The application uses a combination of Clean Architecture, Model View view Model and Repository Pattern.
 
-### Clean Architecture
-
-Clean architecture helps organizing the project into different layers so that it's easy to understand, scale , debug and manage complexities. It was proposed by [Robert C. Martin](https://en.wikipedia.org/wiki/Robert_C._Martin)
-in 2012 in the [Clean Code Blog](http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and it follow the SOLID principle. For smaller apps this is not something to be worried about, however in has proven useful
-when working on apps with longer development and bigger teams. In android here are [Multiple ways of defining Clean Architecture layers](https://proandroiddev.com/multiple-ways-of-defining-clean-architecture-layers-bbb70afa5d4a).
-
 ### Why Clean Architecture?
 
 * Loose coupling between the code - The code can easily be modified without affecting any or a large part of the app's codebase thus easier to scale the application later on.
-
 * Easier to test code.
 * Separation of Concern - Different modules have specific responsibilities making it easier for modification and maintenance.
 
@@ -105,21 +88,8 @@ This helps hide the secrets from the repository
 
 # Demo
 
-|<img src= "demo/nairobi_screenshot.png" width = "300" height = "600">
-|<img src= "demo/south_pacific_ocean_screenshot.png" width = "300" height = "600">
-|<img src= "demo/johannesburg_screenshot.png" width = "300" height = "600">
-|<img src= "demo/quebec_screenshot.png" width = "300" height = "600">
-|<img src= "demo/weather_app_demo.gif" width = "300" height = "600">
-
-# References
-
-## Articles
-
-* [Why do we need Clean Architecture?](https://www.droidcon.com/media-detail?video=481190265)
-* [detailed-guide-on-android-clean-architecture](https://medium.com/android-dev-hacks/detailed-guide-on-android-clean-architecture-9eab262a9011)
-* [clean-architecture-tutorial-for-android-getting-started](https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started#toc-anchor-013)
-* [Multiple ways of defining Clean Architecture layers](https://proandroiddev.com/multiple-ways-of-defining-clean-architecture-layers-bbb70afa5d4a)
-
-## Codelabs
-
-* [Testing](https://developer.android.com/codelabs/advanced-android-kotlin-training-testing-basics#7)
+|<img src= "demo/1.png" width = "300" height = "600">
+|<img src= "demo/2.png" width = "300" height = "600">
+|<img src= "demo/3.png" width = "300" height = "600">
+|<img src= "demo/4.png" width = "300" height = "600">
+|<img src= "demo/app_demo.gif" width = "300" height = "600">

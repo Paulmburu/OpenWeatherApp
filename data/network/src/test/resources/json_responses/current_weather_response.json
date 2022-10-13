@@ -1,43 +1,43 @@
 {
   "coord": {
-    "lon": -122.0842,
-    "lat": -37.4218
+    "lon": 36.8167,
+    "lat": -1.2833
   },
   "weather": [
     {
-      "id": 800,
-      "main": "Clear",
-      "description": "clear sky",
-      "icon": "01d"
+      "id": 801,
+      "main": "Clouds",
+      "description": "few clouds",
+      "icon": "02d"
     }
   ],
   "base": "stations",
   "main": {
-    "temp": 293.44,
-    "feels_like": 293.74,
-    "temp_min": 293.44,
-    "temp_max": 293.44,
-    "pressure": 1027,
-    "humidity": 85,
-    "sea_level": 1027,
-    "grnd_level": 1027
+    "temp": 297.08,
+    "feels_like": 296.52,
+    "temp_min": 297.02,
+    "temp_max": 297.08,
+    "pressure": 1023,
+    "humidity": 38
   },
   "visibility": 10000,
   "wind": {
-    "speed": 6.62,
-    "deg": 22,
-    "gust": 7.73
+    "speed": 2.57,
+    "deg": 160
   },
   "clouds": {
-    "all": 0
+    "all": 20
   },
-  "dt": 1647884246,
+  "dt": 1665654177,
   "sys": {
-    "sunrise": 1647871939,
-    "sunset": 1647915513
+    "type": 1,
+    "id": 2558,
+    "country": "KE",
+    "sunrise": 1665630889,
+    "sunset": 1665674575
   },
-  "timezone": -28800,
-  "id": 0,
-  "name": "",
+  "timezone": 10800,
+  "id": 184745,
+  "name": "Nairobi",
   "cod": 200
 }

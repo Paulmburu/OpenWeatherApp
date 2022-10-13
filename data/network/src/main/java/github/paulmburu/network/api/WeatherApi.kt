@@ -11,8 +11,7 @@ interface WeatherApi {
     @POST("data/2.5/weather")
     @Headers("Accept:application/json")
     suspend fun fetchCurrentWeather(
-        @Query("lat", encoded = true) lat: String,
-        @Query("lon", encoded = true) lon: String,
+        @Query("q", encoded = true) location: String,
         @Query("appid", encoded = true) appid: String,
     ): Response<CurrentLocationWeatherDto>
 
@@ -22,14 +21,5 @@ interface WeatherApi {
         @Query("q", encoded = true) location: String,
         @Query("appid", encoded = true) appid: String,
     ): Response<ForecastResponse>
-
-
-    @POST("data/2.5/weather")
-    @Headers("Accept:application/json")
-    suspend fun searchLocation(
-        @Query("q", encoded = true) location: String,
-        @Query("appid", encoded = true) appid: String,
-    ): Response<CurrentLocationWeatherDto>
-
 
 }

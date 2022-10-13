@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import github.paulmburu.weatherapp.databinding.WeatherForecastItemBinding
+import github.paulmburu.weatherapp.databinding.ItemWeatherForecastBinding
 import github.paulmburu.weatherapp.models.WeatherForecastPresentation
 
-class WeatherForecastRecyclerAdapter(
-) :
+class WeatherForecastRecyclerAdapter :
     ListAdapter<WeatherForecastPresentation, WeatherForecastRecyclerAdapter.WeatherForecastViewHolder>(
         WeatherForecastComparator()
     ) {
@@ -24,7 +23,7 @@ class WeatherForecastRecyclerAdapter(
     }
 
 
-    class WeatherForecastViewHolder(private val binding: WeatherForecastItemBinding) :
+    class WeatherForecastViewHolder(private val binding: ItemWeatherForecastBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
             weatherForecastPresentation: WeatherForecastPresentation,
@@ -38,12 +37,11 @@ class WeatherForecastRecyclerAdapter(
         companion object {
             fun create(parent: ViewGroup): WeatherForecastViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = WeatherForecastItemBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemWeatherForecastBinding.inflate(layoutInflater, parent, false)
 
                 return WeatherForecastViewHolder(binding)
             }
         }
-
     }
 
     class WeatherForecastComparator : DiffUtil.ItemCallback<WeatherForecastPresentation>() {
@@ -59,8 +57,6 @@ class WeatherForecastRecyclerAdapter(
             newItem: WeatherForecastPresentation
         ): Boolean {
             return oldItem.isoTimeStamp == newItem.isoTimeStamp
-
         }
-
     }
 }

@@ -30,7 +30,7 @@
         android:id="@+id/tempTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="25.4 °c"
+        android:text="@string/_25_4_c"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
@@ -40,7 +40,7 @@
         android:id="@+id/cloudsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Few Clouds"
+        android:text="@string/few_clouds"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/tempTextView" />
 
@@ -48,7 +48,7 @@
         android:id="@+id/windTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wind :"
+        android:text="@string/wind"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/cloudsTextView" />
 
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="7.2 m/s"
+        android:text="@string/_7_2_m_s"
         app:layout_constraintBottom_toBottomOf="@+id/windTextView"
         app:layout_constraintStart_toEndOf="@+id/windTextView"
         app:layout_constraintTop_toTopOf="@+id/windTextView" />
@@ -66,7 +66,7 @@
         android:id="@+id/pressureTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pressure :"
+        android:text="@string/pressure"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/windTextView" />
 
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="1016.0 hPa"
+        tools:text="@string/_1016_0_hpa"
         app:layout_constraintBottom_toBottomOf="@+id/pressureTextView"
         app:layout_constraintStart_toEndOf="@+id/pressureTextView"
         app:layout_constraintTop_toTopOf="@+id/pressureTextView" />
@@ -84,7 +84,7 @@
         android:id="@+id/humidityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Humidity :"
+        android:text="@string/humidity"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/pressureTextView" />
 
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="3990"
+        android:text="@string/_3990"
         app:layout_constraintBottom_toBottomOf="@+id/humidityTextView"
         app:layout_constraintStart_toEndOf="@+id/humidityTextView"
         app:layout_constraintTop_toTopOf="@+id/humidityTextView" />
@@ -102,7 +102,7 @@
         android:id="@+id/sunriseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sunrise :"
+        android:text="@string/sunrise"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/humidityTextView" />
 
@@ -111,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="12:14 PM"
+        tools:text="@string/_12_14_pm"
         app:layout_constraintBottom_toBottomOf="@+id/sunriseTextView"
         app:layout_constraintStart_toEndOf="@+id/sunriseTextView"
         app:layout_constraintTop_toBottomOf="@+id/humidityTextView" />
@@ -120,7 +120,7 @@
         android:id="@+id/sunsetTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sunset :"
+        android:text="@string/sunset"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/sunriseTextView"
@@ -131,13 +131,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="1.41 AM"
+        tools:text="@string/_1_41_am"
         app:layout_constraintBottom_toBottomOf="@+id/sunsetTextView"
         app:layout_constraintStart_toEndOf="@+id/sunsetTextView"
         app:layout_constraintTop_toTopOf="@+id/sunsetTextView" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/weatherImageView"
+        android:contentDescription="@string/weather_type_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="8dp"
@@ -149,17 +150,17 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last Update"
+        android:text="@string/last_update"
         app:layout_constraintBottom_toBottomOf="@+id/sunriseTimeStampTextView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/weatherImageView"
+        app:layout_constraintStart_toStartOf="@+id/weatherImageView"
         app:layout_constraintTop_toTopOf="@+id/sunriseTimeStampTextView" />
 
     <TextView
         android:id="@+id/lastUpdateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="8.39 PM"
+        tools:text="@string/_8_39_pm"
         app:layout_constraintEnd_toEndOf="@+id/textView16"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView16"

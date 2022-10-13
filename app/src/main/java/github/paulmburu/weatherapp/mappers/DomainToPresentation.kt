@@ -7,6 +7,7 @@ import github.paulmburu.weatherapp.models.CurrentLocationWeatherPresentation
 import github.paulmburu.weatherapp.models.WeatherForecastPresentation
 import github.paulmburu.weatherapp.util.convertKelvinToCelsius
 import github.paulmburu.weatherapp.util.convertTimestampToDate
+import github.paulmburu.weatherapp.util.convertTimestampToFullDate
 
 fun CurrentLocationWeather.toPresentation(): CurrentLocationWeatherPresentation {
     return CurrentLocationWeatherPresentation(
@@ -31,7 +32,12 @@ fun WeatherForecast.toPresentation(): WeatherForecastPresentation{
     return WeatherForecastPresentation(
         isoTimeStamp = isoTimeStamp,
         dayOfTheWeek = isoTimeStamp.convertTimestampToDate(),
+        isoTimeStamp.convertTimestampToFullDate(),
         weatherType = weatherInfo[0].main,
-        temperature = mainInfo.temp.convertKelvinToCelsius()
+        weatherInfo[0].description.replaceFirstChar { it.uppercaseChar() },
+        temperature = mainInfo.temp.convertKelvinToCelsius(),
+        pressure = "${mainInfo.pressure} m/s",
+        humidity = mainInfo.humidity.toString(),
+        windSpeed = "${wind.speed} m/s"
     )
 }

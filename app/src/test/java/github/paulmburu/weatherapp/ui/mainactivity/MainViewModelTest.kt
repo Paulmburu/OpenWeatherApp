@@ -56,10 +56,10 @@ class MainViewModelTest {
         )
     }
 
-    @Test
-    fun `when setCoordinates is called, the current coordinates should be set`() {
-        viewModel.setCoordinates(28.4, 34.6)
-        val value = viewModel.currentUserCoordinates.getOrAwaitValue()
-        Truth.assertThat(value).isEqualTo(Coordinates(28.4, 34.6))
-    }
+//    @Test
+//    fun `when viewmodel is initialized, the current connectivity status is false`() {
+//        viewModel.loadNetworkData("Nairobi")
+//        val value = viewModel.mutableConnectivityStatus.getOrAwaitValue()
+//        Truth.assertThat(value).isEqualTo(false)
+//    }
 }

@@ -14,17 +14,13 @@ class WeatherRepositoryFake : WeatherRepository {
     private val weatherForecastDatabase  = LinkedHashMap<String, WeatherForecast>()
 
     override fun fetchCurrentWeather(
-        lat: Double,
-        lon: Double
+        location: String
     ): Flow<Resource<CurrentLocationWeather>> = flow {
         emit(Resource.Success(Data.currentLocationWeather))
     }
 
-    override fun fetchWeatherForecast(
-        lat: Double,
-        lon: Double
-    ): Flow<Resource<List<WeatherForecast>>> = flow {
-        emit(Resource.Success(Data.WeatherForecastData.response))
+    override fun fetchWeatherForecast(location: String): Flow<Resource<List<WeatherForecast>>> = flow {
+        emit(Resource.Success<List<WeatherForecast>>(Data.WeatherForecastData.response))
     }
 
     override suspend fun insertCurrentWeather(currentWeather: List<CurrentLocationWeather>) {
@@ -45,17 +41,12 @@ class WeatherRepositoryFake : WeatherRepository {
         }
     }
 
-    override fun getCurrentWeather(
-        lat: Double,
-        lon: Double
-    ): Flow<Resource<CurrentLocationWeather>> {
+    override fun getCurrentWeather(): Flow<Resource<CurrentLocationWeather>> {
         return flowOf(Resource.Success(Data.currentLocationWeather))
     }
 
-    override fun getWeatherForecast(
-        lat: Double,
-        lon: Double
-    ): Flow<Resource<List<WeatherForecast>>> {
+    override fun getWeatherForecast(): Flow<Resource<List<WeatherForecast>>> {
         return flowOf(Resource.Success(listOf()))
     }
+
 }

@@ -4,4 +4,5 @@ data class WeatherForecast(
     var isoTimeStamp: String,
     val weatherInfo: List<WeatherInfo>,
     val mainInfo: MainInfo,
+    val wind: WindInfo,
 )
